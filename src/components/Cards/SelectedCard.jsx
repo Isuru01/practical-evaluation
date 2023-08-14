@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../pages/Home";
+import PopUp from "../Models/PopUp";
 
 const SelectedCard = (props) => {
   const { id, name, price, image } = props;

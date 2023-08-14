@@ -22,6 +22,8 @@ const VehicleCard = (props) => {
     msg: "",
   });
 
+  const [add, setAdd] = useState(false);
+
   const {
     id,
     name,
@@ -39,7 +41,6 @@ const VehicleCard = (props) => {
         });
       } else {
         setError({ error: false, msg: "" });
-        <PopUp />;
       }
     } else {
       setError({
@@ -60,12 +61,15 @@ const VehicleCard = (props) => {
       );
       // If the vehicle doesn't exist, add it to the selected array
       if (!vehicleExists) {
+        setAdd(true);
         return [...prevSelected, vehicle];
       }
       // If the vehicle already exists, return the previous selected array
       return prevSelected;
     });
   };
+
+  if (add) return <PopUp />;
 
   return (
     <Card
