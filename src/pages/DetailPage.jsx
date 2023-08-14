@@ -1,11 +1,32 @@
-import React from "react";
-import { Box, Typography, Chip, Container, Paper } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Chip,
+  Container,
+  Paper,
+  TextField,
+  Button,
+} from "@mui/material";
+import { Navigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAVehicle } from "../api/vehicle.api.mjs";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { handleSubmit, handleBid } from "../components/utils/utils.mjs";
+import { useNavigate } from "react-router-dom";
+import { SearchContext } from "./Home";
 
 const DetailPage = () => {
   const { id } = useParams();
+
+  const [error, setError] = useState({
+    error: true,
+    msg: "",
+  });
+
+  const naigate = useNavigate();
+
+  const [add, setAdd] = useState(false);
 
   const { isLoading, data: vehicle } = useQuery({
     queryKey: ["vehicles", id],
@@ -27,47 +48,11 @@ const DetailPage = () => {
     },
   } = vehicle;
 
-  // const handleBid = (e) => {
-  //   const { name, value } = e.target;
-
-  //   if (!isNaN(value)) {
-  //     if (value <= price) {
-  //       setError({
-  //         error: true,
-  //         msg: "Bid should be equal or higher than the price",
-  //       });
-  //     } else {
-  //       setError({ error: false, msg: "" });
-  //     }
-  //   } else {
-  //     setError({
-  //       error: true,
-  //       msg: "Please input only a number price",
-  //     });
-  //   }
-  // };
-
-  // const handleSubmit = (id, name, price, image) => {
-  //   const vehicle = { id, name, price, image };
-
-  //   //reference from the stackover flow to get the unique values to seleceted state array
-  //   setSelected((prevSelected) => {
-  //     // Check if the vehicle already exists in the selected array
-  //     const vehicleExists = prevSelected.some(
-  //       (selectedVehicle) => selectedVehicle.id === vehicle.id
-  //     );
-  //     // If the vehicle doesn't exist, add it to the selected array
-  //     if (!vehicleExists) {
-  //       return [...prevSelected, vehicle];
-  //     }
-  //     // If the vehicle already exists, return the previous selected array
-  //     return prevSelected;
-  //   });
-  // };
-
   return (
     <Container>
-      <Box component={Paper} elevation={4}>
+      <Box component={Paper} sx={{ mt: 2 }} elevation={4}>
+        <ArrowBackIcon sx={{ ml: 2, mt: 2 }} onClick={() => naigate("/")} />
+
         <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
           <img width="100%" src={image} />
 
@@ -80,6 +65,10 @@ const DetailPage = () => {
           >
             <Typography variant="h4" mt={2}>
               {brand} {name}
+            </Typography>
+
+            <Typography variant="h6">
+              Price {price} {currency}
             </Typography>
 
             <Box>
@@ -100,24 +89,29 @@ const DetailPage = () => {
               />
             </Box>
 
-            {/* <Box sx={{ display: "flex", gap: 1 }}>
+            <Box>
               <TextField
                 name="bid"
                 fullWidth
                 label="Bid"
                 size="small"
-                onChange={handleBid}
+                onChange={(e) => handleBid(e, setError, price)}
                 helperText={error.msg}
               />
 
               <Button
+                sx={{ mt: 1 }}
+                size="small"
                 disabled={error.error}
+                fullWidth
                 variant="contained"
-                onClick={() => handleSubmit(id, name, price, image)}
+                onClick={() =>
+                  handleSubmit(id, name, price, image, setSelected, setAdd)
+                }
               >
                 Bid
               </Button>
-            </Box> */}
+            </Box>
           </Box>
         </Box>
       </Box>
