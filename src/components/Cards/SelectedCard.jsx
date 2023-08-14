@@ -26,22 +26,48 @@ const SelectedCard = (props) => {
       component={Paper}
       elevation={3}
       sx={{
+        p: 0,
+        m: 1,
+        display: "flex",
+        alignItems: "center",
+        gap: 1,
         maxWidth: { sm: 1, md: "300px" },
         minWidth: { md: "300px" },
       }}
     >
-      <CardMedia component="img" image={image} title={name} />
+      <CardMedia
+        sx={{ width: "100px", height: "100px", ml: "4px", borderRadiu: 3 }}
+        component="img"
+        image={image}
+        title={name}
+      />
 
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+      <Box
+        sx={{
+          p: 0,
+          m: 1,
+          display: "flex",
+          width: "100%",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="h5" component="div">
           {name}
         </Typography>
         <Typography gutterBottom variant="body2" color="text.secondary">
           {price} LKR
         </Typography>
 
-        <Button onClick={() => handleNavigate(id)}>View</Button>
-      </CardContent>
+        <Button
+          sx={{ ml: "auto" }}
+          size="small"
+          variant="outlined"
+          onClick={() => handleNavigate(id)}
+        >
+          View
+        </Button>
+      </Box>
     </Card>
   );
 };

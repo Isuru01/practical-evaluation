@@ -18,6 +18,7 @@ import SelectedCard from "../components/Cards/SelectedCard";
 export const SearchContext = createContext();
 
 const Home = () => {
+  let total = 0;
   const [search, setSearch] = useState({
     brand: "",
     query: "",
@@ -50,17 +51,25 @@ const Home = () => {
 
       <Box>
         <SearchContext.Provider value={searchContextValue}>
-          <Drawer anchor="right" open={open} onClose={handleToggle}>
-            {selected.map((vehicle) => (
-              <SelectedCard
-                id={vehicle.id}
-                name={vehicle.name}
-                image={vehicle.image}
-                price={vehicle.price}
-              />
-            ))}
+          <Drawer
+            anchor="right"
+            open={open}
+            width="400px"
+            onClose={handleToggle}
+          >
+            {selected.map((vehicle) => {
+              total += vehicle.price;
+              return (
+                <SelectedCard
+                  id={vehicle.id}
+                  name={vehicle.name}
+                  image={vehicle.image}
+                  price={vehicle.price}
+                />
+              );
+            })}
 
-            <Typography>Total 0.00LKR</Typography>
+            <Typography>Total {total}.00 LKR</Typography>
           </Drawer>
         </SearchContext.Provider>
       </Box>
