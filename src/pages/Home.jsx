@@ -57,6 +57,10 @@ const Home = () => {
             width="400px"
             onClose={handleToggle}
           >
+            <Typography variant="h6" sx={{ textAlign: "center" }}>
+              Bidding
+            </Typography>
+
             {selected.map((vehicle) => {
               total += vehicle.price;
               return (

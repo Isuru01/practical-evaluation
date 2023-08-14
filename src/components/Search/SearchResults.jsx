@@ -14,7 +14,10 @@ const SearchResults = () => {
   });
 
   const { isLoading, data: vehicleData } = useQuery({
-    queryKey: ["vehicles", { start: page.start, limit: page.limit }],
+    queryKey: [
+      "vehicles",
+      { query: search.brand, start: page.start, limit: page.limit },
+    ],
     queryFn: fetchVehicles,
   });
 
@@ -23,16 +26,25 @@ const SearchResults = () => {
   }
 
   console.log(search);
-  const results = vehicleData
-    ?.filter((vehicle) => vehicle.details.brand === search.brand)
-    .map((vehicle) => (
-      <VehicleCard
-        key={vehicle.id}
-        id={vehicle.id}
-        name={vehicle.name}
-        details={vehicle.details}
-      />
-    ));
+  // const results = vehicleData
+  //   ?.filter((vehicle) => vehicle.details.brand === search.brand)
+  //   .map((vehicle) => (
+  //     <VehicleCard
+  //       key={vehicle.id}
+  //       id={vehicle.id}
+  //       name={vehicle.name}
+  //       details={vehicle.details}
+  //     />
+  //   ));
+
+  const results = vehicleData.map((vehicle) => (
+    <VehicleCard
+      key={vehicle.id}
+      id={vehicle.id}
+      name={vehicle.name}
+      details={vehicle.details}
+    />
+  ));
 
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>{results}</Box>

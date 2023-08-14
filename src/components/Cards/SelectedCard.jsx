@@ -31,6 +31,7 @@ const SelectedCard = (props) => {
         m: 1,
         display: "flex",
         alignItems: "center",
+
         gap: 1,
         maxWidth: { sm: 1, md: "300px" },
         minWidth: { md: "300px" },

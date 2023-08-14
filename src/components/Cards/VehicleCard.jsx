@@ -27,7 +27,15 @@ const VehicleCard = (props) => {
   const {
     id,
     name,
-    details: { currency, color, description, manufactureYear, image, price },
+    details: {
+      currency,
+      color,
+      description,
+      manufactureYear,
+      image,
+      price,
+      brand,
+    },
   } = props;
 
   const handleBid = (e) => {
@@ -93,7 +101,7 @@ const VehicleCard = (props) => {
 
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {brand} {name}
         </Typography>
         <Typography gutterBottom variant="body2" color="text.secondary">
           {description}

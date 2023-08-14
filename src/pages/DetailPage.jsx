@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Chip, Container } from "@mui/material";
+import { Box, Typography, Chip, Container, Paper } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAVehicle } from "../api/vehicle.api.mjs";
@@ -16,7 +16,15 @@ const DetailPage = () => {
 
   const {
     name,
-    details: { currency, color, description, manufactureYear, image, price },
+    details: {
+      currency,
+      color,
+      description,
+      manufactureYear,
+      brand,
+      image,
+      price,
+    },
   } = vehicle;
 
   // const handleBid = (e) => {
@@ -59,25 +67,38 @@ const DetailPage = () => {
 
   return (
     <Container>
-      <Box>
-        <Box sx={{ display: "flex" }}>
-          <img src={image} />
+      <Box component={Paper} elevation={4}>
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+          <img width="100%" src={image} />
 
-          <Box>
-            <Typography variant="h6">{name}</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <Typography variant="h4" mt={2}>
+              {brand} {name}
+            </Typography>
 
-            <Typography>Description</Typography>
+            <Box>
+              <Typography>Description</Typography>
+              <Typography color="text.secondary">{description}</Typography>
+            </Box>
 
-            <Typography color="text.secondary">{description}</Typography>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography>Color</Typography>
 
-            <Chip
-              sx={{
-                bgcolor: color,
-                borderRadius: "222113",
-                width: "32px",
-                height: "32px",
-              }}
-            />
+              <Chip
+                sx={{
+                  bgcolor: color,
+                  borderRadius: "222113",
+                  width: "32px",
+                  height: "32px",
+                }}
+              />
+            </Box>
 
             {/* <Box sx={{ display: "flex", gap: 1 }}>
               <TextField
