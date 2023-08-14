@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-const PopUp = () => {
+const PopUp = ({ name, brand }) => {
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -25,7 +25,7 @@ const PopUp = () => {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Bid is added successfully
+            {name} {brand} Bid is added successfully
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
         </Box>

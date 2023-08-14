@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -40,14 +41,18 @@ const Home = () => {
 
   return (
     <Container>
-      <Box>
-        <AddShoppingCartIcon onClick={handleToggle} />
+      <Box sx={{ mt: 2 }}>
+        <AddShoppingCartIcon color="primary" onClick={handleToggle} />
+
+        <Divider />
 
         <SearchContext.Provider value={searchContextValue}>
           <SearchBar />
           <SearchResults />
         </SearchContext.Provider>
       </Box>
+
+      <Divider sx={{ mb: 2 }} />
 
       <Box>
         <SearchContext.Provider value={searchContextValue}>

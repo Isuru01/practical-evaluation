@@ -39,7 +39,7 @@ const VehicleCard = (props) => {
     },
   } = props;
 
-  if (add) return <PopUp />;
+  if (add) return <PopUp name={name} brand={brand} />;
 
   return (
     <Card
@@ -61,7 +61,7 @@ const VehicleCard = (props) => {
         title={name}
       />
 
-      <CardContent>
+      <CardContent sx={{ display: "flex", flexDirection: "column" }}>
         <Typography gutterBottom variant="h5" component="div">
           {brand} {name}
         </Typography>
@@ -69,14 +69,12 @@ const VehicleCard = (props) => {
           {description}
         </Typography>
 
-        <Typography gutterBottom color="text.secondary">
+        <Typography gutterBottom color="primary">
           {price} {currency}
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Typography gutterBottom color="text.secondary">
-            Color
-          </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+          <Typography color="text.secondary">Color</Typography>
 
           <Chip
             sx={{
@@ -88,7 +86,7 @@ const VehicleCard = (props) => {
           />
         </Box>
 
-        <Box>
+        <Box sx={{ mt: "auto" }}>
           <TextField
             name="bid"
             fullWidth

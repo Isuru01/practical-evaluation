@@ -14,6 +14,8 @@ const brands = [
   { id: 1, brand: "Volkswagen" },
   { id: 2, brand: "Audi" },
   { id: 3, brand: "Ford" },
+  { id: 4, brand: "Mercedes" },
+  { id: 5, brand: "BMW" },
 ];
 
 const SearchOption = () => {
