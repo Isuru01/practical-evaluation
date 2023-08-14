@@ -56,12 +56,7 @@ const Home = () => {
 
       <Box>
         <SearchContext.Provider value={searchContextValue}>
-          <Drawer
-            anchor="right"
-            open={open}
-            width="400px"
-            onClose={handleToggle}
-          >
+          <Drawer anchor="right" open={open} onClose={handleToggle}>
             <Typography variant="h6" sx={{ textAlign: "center" }}>
               Bidding
             </Typography>
@@ -78,7 +73,18 @@ const Home = () => {
               );
             })}
 
-            <Typography>Total {total}.00 LKR</Typography>
+            {selected.length === 0 && (
+              <Typography
+                variant="h6"
+                sx={{ textAlign: "center", ml: 2, mr: 5 }}
+              >
+                There is no bid items
+              </Typography>
+            )}
+
+            <Typography variant="h5" sx={{ ml: 2 }}>
+              Total <br /> {total}.00 LKR
+            </Typography>
           </Drawer>
         </SearchContext.Provider>
       </Box>

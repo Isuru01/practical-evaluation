@@ -47,7 +47,7 @@ const VehicleCard = (props) => {
       elevation={3}
       sx={{
         maxWidth: { sm: 1, md: "300px" },
-        minWidth: { md: "300px" },
+        minWidth: { sm: 1, md: "300px" },
       }}
     >
       <CardMedia
@@ -61,12 +61,24 @@ const VehicleCard = (props) => {
         title={name}
       />
 
-      <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "space-between",
+        }}
+      >
         <Typography gutterBottom variant="h5" component="div">
           {brand} {name}
         </Typography>
-        <Typography gutterBottom variant="body2" color="text.secondary">
-          {description}
+        <Typography
+          gutterBottom
+          variant="body2"
+          color="text.secondary"
+          sx={{ height: "40px" }}
+        >
+          {description.slice(0, 100)}
         </Typography>
 
         <Typography gutterBottom color="primary">
@@ -86,7 +98,7 @@ const VehicleCard = (props) => {
           />
         </Box>
 
-        <Box sx={{ mt: "auto" }}>
+        <Box>
           <TextField
             name="bid"
             fullWidth
