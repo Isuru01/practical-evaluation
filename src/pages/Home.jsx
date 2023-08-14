@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import SearchBar from "../components/Search/SearchBar";
@@ -39,7 +40,7 @@ const Home = () => {
   return (
     <Container>
       <Box>
-        <AddShoppingCartIcon component={Button} onClick={handleToggle} />
+        <AddShoppingCartIcon onClick={handleToggle} />
 
         <SearchContext.Provider value={searchContextValue}>
           <SearchBar />
@@ -58,11 +59,8 @@ const Home = () => {
                 price={vehicle.price}
               />
             ))}
-            <List>
-              <ListItem>
-                <ListItemText primary="Hellow" secondary="WOrkd" />
-              </ListItem>
-            </List>
+
+            <Typography>Total 0.00LKR</Typography>
           </Drawer>
         </SearchContext.Provider>
       </Box>

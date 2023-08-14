@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { fetchVehicles } from "../../api/vehicle.api.mjs";
@@ -8,8 +8,13 @@ import VehicleCard from "../Cards/VehicleCard";
 const SearchResults = () => {
   const { setSearch, search } = useContext(SearchContext);
 
+  const [page, setPage] = useState({
+    start: 0,
+    limit: 5,
+  });
+
   const { isLoading, data: vehicleData } = useQuery({
-    queryKey: ["vehicles"],
+    queryKey: ["vehicles", { start, limit }],
     queryFn: fetchVehicles,
   });
 
