@@ -14,7 +14,7 @@ const SearchResults = () => {
   });
 
   const { isLoading, data: vehicleData } = useQuery({
-    queryKey: ["vehicles", { start, limit }],
+    queryKey: ["vehicles", { start: page.start, limit: page.limit }],
     queryFn: fetchVehicles,
   });
 
