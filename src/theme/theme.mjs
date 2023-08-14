@@ -11,9 +11,6 @@ const theme = createTheme({
       main: "#FFFFFF",
     },
   },
-  typography: {
-    fontFamily: "Inter",
-  },
 });
 
 export default theme;

@@ -28,8 +28,6 @@ const SearchResults = () => {
     return <div>Loading</div>;
   }
 
-  console.log(search);
-
   const results = vehicleData
     .slice((page - 1) * resultsPerPage, page * resultsPerPage)
     .map((vehicle) => (
