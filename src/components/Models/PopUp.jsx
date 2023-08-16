@@ -15,10 +15,8 @@ const style = {
   p: 4,
 };
 
-const PopUp = ({ name, brand }) => {
+const PopUp = ({ name, brand, handleClose }) => {
   const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <div>

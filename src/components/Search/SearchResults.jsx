@@ -2,13 +2,14 @@ import { useContext, useState } from "react";
 import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { fetchVehicles } from "../../api/vehicle.api.mjs";
-import { SearchContext } from "../../pages/Home";
+import { SearchContext } from "../../context/Context.mjs";
 import { Pagination } from "@mui/material";
 
 import VehicleCard from "../Cards/VehicleCard";
 
 const SearchResults = () => {
   const { setSearch, search } = useContext(SearchContext);
+
   const [page, setPage] = useState(1);
   const resultsPerPage = 5;
 

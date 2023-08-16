@@ -2,10 +2,9 @@ import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, DetailPage } from "./pages/index.mjs";
+import { BiddingContext } from "./context/Context.mjs";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
       <Routes>

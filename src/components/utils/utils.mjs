@@ -1,4 +1,4 @@
-export const handleBid = (e, setError, price) => {
+export const handleBid = (e, setBid, setError, price) => {
   const { name, value } = e.target;
 
   if (!isNaN(value)) {
@@ -9,6 +9,7 @@ export const handleBid = (e, setError, price) => {
       });
     } else {
       setError({ error: false, msg: "" });
+      setBid(value);
     }
   } else {
     setError({
@@ -18,21 +19,44 @@ export const handleBid = (e, setError, price) => {
   }
 };
 
-export const handleSubmit = (id, name, price, image, setSelected, setAdd) => {
-  const vehicle = { id, name, price, image };
+export const handleSubmit = (
+  id,
+  name,
+  brand,
+  price,
+  image,
+  bid,
+  setBidding,
+  setAdd
+) => {
+  const vehicle = { id, name, price, image, bid, brand };
 
-  //reference from the stackover flow to get the unique values to seleceted state array
-  setSelected((prevSelected) => {
-    // Check if the vehicle already exists in the selected array
-    const vehicleExists = prevSelected.some(
-      (selectedVehicle) => selectedVehicle.id === vehicle.id
-    );
-    // If the vehicle doesn't exist, add it to the selected array
-    if (!vehicleExists) {
+  setBidding((prev) => {
+    let exist = prev.find((prevVeh) => prevVeh.id === vehicle.id);
+
+    if (exist) {
+      // console.log(exist);
+      exist.bid = bid;
       setAdd(true);
-      return [...prevSelected, vehicle];
+      return [...prev];
+    } else {
+      setAdd(true);
+      return [...prev, vehicle];
     }
-    // If the vehicle already exists, return the previous selected array
-    return prevSelected;
   });
+
+  // //reference from the stackover flow to get the unique values to seleceted state array
+  // setBidding((prevBdidding) => {
+  //   // Check if the vehicle already exists in the selected array
+  //   const vehicleExists = prevBdidding.some(
+  //     (selectedVehicle) => selectedVehicle.id === vehicle.id
+  //   );
+  //   // If the vehicle doesn't exist, add it to the selected array
+  //   if (!vehicleExists) {
+  //     setAdd(true);
+  //     return [...prevBdidding, vehicle];
+  //   }
+  //   // If the vehicle already exists, return the previous selected array
+  //   return prevBdidding;
+  // })
 };

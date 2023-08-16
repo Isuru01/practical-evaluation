@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Typography,
@@ -13,19 +13,22 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAVehicle } from "../api/vehicle.api.mjs";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { handleSubmit, handleBid } from "../components/utils/utils.mjs";
+import { BiddingContext } from "../context/Context.mjs";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "./Home";
+import NavBar from "../components/Navigation/NavBar";
 
 const DetailPage = () => {
   const { id } = useParams();
+
+  const naigate = useNavigate();
+  const { bidding, setBidding } = useContext(BiddingContext);
 
   const [error, setError] = useState({
     error: true,
     msg: "",
   });
 
-  const naigate = useNavigate();
-
+  const [bid, setBid] = useState(0);
   const [add, setAdd] = useState(false);
 
   const { isLoading, data: vehicle } = useQuery({
@@ -50,6 +53,7 @@ const DetailPage = () => {
 
   return (
     <Container>
+      <NavBar />
       <Box component={Paper} sx={{ mt: 2 }} elevation={4}>
         <ArrowBackIcon sx={{ ml: 2, mt: 2 }} onClick={() => naigate("/")} />
 
@@ -95,18 +99,27 @@ const DetailPage = () => {
                 fullWidth
                 label="Bid"
                 size="small"
-                onChange={(e) => handleBid(e, setError, price)}
+                defaultValue={bid}
+                onChange={(e) => handleBid(e, setBid, setError, price)}
                 helperText={error.msg}
               />
 
               <Button
                 sx={{ mt: 1 }}
-                size="small"
                 disabled={error.error}
                 fullWidth
                 variant="contained"
                 onClick={() =>
-                  handleSubmit(id, name, price, image, setSelected, setAdd)
+                  handleSubmit(
+                    id,
+                    name,
+                    brand,
+                    price,
+                    image,
+                    bid,
+                    setBidding,
+                    setAdd
+                  )
                 }
               >
                 Bid

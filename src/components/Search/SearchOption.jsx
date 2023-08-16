@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { SearchContext } from "../../pages/Home";
+import { SearchContext } from "../../context/Context.mjs";
 import {
   Box,
   InputLabel,
@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 const brands = [
+  { id: 0, brand: "All" },
   { id: 1, brand: "Volkswagen" },
   { id: 2, brand: "Audi" },
   { id: 3, brand: "Ford" },

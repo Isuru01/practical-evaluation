@@ -2,6 +2,7 @@ import AxiosInstance from "./AxiosInstance.mjs";
 
 const fetchVehicles = async ({ queryKey }) => {
   console.log(queryKey[1].query);
+
   const result = await AxiosInstance().get(
     `/vehicles?details.brand=${queryKey[1].query}`
   );

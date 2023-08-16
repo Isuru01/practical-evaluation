@@ -11,19 +11,21 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { SearchContext } from "../../pages/Home";
+import { BiddingContext, SearchContext } from "../../context/Context.mjs";
 import { handleSubmit, handleBid } from "../utils/utils.mjs";
 import PopUp from "../Models/PopUp";
+import BiddingField from "../BiddingField";
 
 const VehicleCard = (props) => {
-  const { selected, setSelected } = useContext(SearchContext);
+  // const { bidding, setBidding } = useContext(BiddingContext);
 
-  const [error, setError] = useState({
-    error: true,
-    msg: "",
-  });
+  // const [error, setError] = useState({
+  //   error: true,
+  //   msg: "",
+  // });
 
-  const [add, setAdd] = useState(false);
+  // const [bid, setBid] = useState(0);
+  // const [add, setAdd] = useState(false);
 
   const {
     id,
@@ -39,7 +41,7 @@ const VehicleCard = (props) => {
     },
   } = props;
 
-  if (add) return <PopUp name={name} brand={brand} />;
+  // if (add) return <PopUp name={name} brand={brand} />;
 
   return (
     <Card
@@ -98,29 +100,46 @@ const VehicleCard = (props) => {
           />
         </Box>
 
-        <Box>
+        <BiddingField
+          id={id}
+          name={name}
+          price={price}
+          brand={brand}
+          image={image}
+        />
+
+        {/* <Box>
           <TextField
             name="bid"
             fullWidth
             label="Bid"
             size="small"
-            onChange={(e) => handleBid(e, setError, price)}
+            defaultValue={bid}
+            onChange={(e) => handleBid(e, setBid, setError, price)}
             helperText={error.msg}
           />
-          <CardActionArea>
-            <Button
-              sx={{ mt: 1 }}
-              disabled={error.error}
-              fullWidth
-              variant="contained"
-              onClick={() =>
-                handleSubmit(id, name, price, image, setSelected, setAdd)
-              }
-            >
-              Bid
-            </Button>
-          </CardActionArea>
-        </Box>
+
+          <Button
+            sx={{ mt: 1 }}
+            disabled={error.error}
+            fullWidth
+            variant="contained"
+            onClick={() =>
+              handleSubmit(
+                id,
+                name,
+                brand,
+                price,
+                image,
+                bid,
+                setBidding,
+                setAdd
+              )
+            }
+          >
+            Bid
+          </Button>
+        </Box> */}
       </CardContent>
     </Card>
   );

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import {
+  Chip,
   Box,
   Card,
   Typography,
@@ -11,11 +12,8 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../pages/Home";
-import PopUp from "../Models/PopUp";
 
-const SelectedCard = (props) => {
-  const { id, name, price, image } = props;
+const SelectedCard = ({ id, name, brand, price, image, bid }) => {
   const naviagte = useNavigate();
 
   const handleNavigate = (id) => {
@@ -29,16 +27,15 @@ const SelectedCard = (props) => {
       sx={{
         p: 0,
         m: 1,
+        gap: 1,
         display: "flex",
         alignItems: "center",
-
-        gap: 1,
         maxWidth: { sm: 1, md: "100%" },
         minWidth: { md: "300px" },
       }}
     >
       <CardMedia
-        sx={{ width: "100px", height: "100px", ml: "4px", borderRadiu: 3 }}
+        sx={{ width: "160px", height: "120%", ml: "4px", borderRadiu: 3 }}
         component="img"
         image={image}
         title={name}
@@ -54,15 +51,27 @@ const SelectedCard = (props) => {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography gutterBottom variant="body2" color="text.secondary">
-          {price} LKR
+        <Typography sx={{ fontSize: "1.2rem" }} component="div">
+          {brand} {name}
         </Typography>
 
+        <Box sx={{ display: "flex", gap: 4 }}>
+          <Typography gutterBottom variant="body2" color="primary">
+            Latest Bid <br /> {bid} LKR
+          </Typography>
+
+          <Typography
+            sx={{ textAlign: "right" }}
+            gutterBottom
+            variant="body2"
+            color="primary"
+          >
+            Original Price <br /> {price} LKR
+          </Typography>
+        </Box>
+
         <Button
-          sx={{ ml: "auto" }}
+          sx={{ ml: "auto", mt: 1 }}
           size="small"
           variant="outlined"
           onClick={() => handleNavigate(id)}
