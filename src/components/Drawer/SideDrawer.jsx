@@ -1,19 +1,28 @@
 import { useContext } from "react";
-import { Drawer, Typography, Box } from "@mui/material";
+import { Drawer, Typography, Box, Button } from "@mui/material";
 import { BiddingContext } from "../../context/Context.mjs";
 import SelectedCard from "../Cards/SelectedCard";
 
 const SideDrawer = ({ open, handleToggle }) => {
-  const { bidding } = useContext(BiddingContext);
+  const { bidding, setBidding } = useContext(BiddingContext);
 
-  let totalValue = 0.0;
-  let totalBid = 0.0;
+  let totalValue = Number(0.0);
+  let totalBid = Number(0.0);
+
+  const handleClear = () => {
+    setBidding([]);
+  };
 
   return (
     <Drawer anchor="right" open={open} onClose={handleToggle}>
-      <Typography variant="h6" sx={{ textAlign: "center" }}>
-        Bidding
-      </Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-between", m: 2 }}>
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
+          Bidding
+        </Typography>
+        <Button variant="outlined" onClick={handleClear}>
+          Claear All
+        </Button>
+      </Box>
 
       {bidding.map((vehicle) => {
         totalValue += Number(vehicle.price);
@@ -38,11 +47,11 @@ const SideDrawer = ({ open, handleToggle }) => {
       )}
 
       <Box sx={{ borderTop: "1px solid black", my: 2 }}>
-        <Typography fontWeight="500" sx={{ ml: 2, mt: 2 }}>
-          Total <br /> {totalValue}.00 LKR
+        <Typography fontWeight="500" sx={{ ml: 2, my: 2, fontSize: "1.2rem" }}>
+          Total Item Worth <br /> {totalValue}.00 LKR
         </Typography>
 
-        <Typography fontWeight="500" sx={{ ml: 2 }}>
+        <Typography fontWeight="500" sx={{ ml: 2, fontSize: "1.2rem" }}>
           My Total Bidding
           <br /> {totalBid}.00 LKR
         </Typography>

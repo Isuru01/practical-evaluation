@@ -37,7 +37,11 @@ const SelectedCard = ({ id, name, brand, price, image, bid }) => {
       <CardMedia
         sx={{ width: "160px", height: "120%", ml: "4px", borderRadiu: 3 }}
         component="img"
-        image={image}
+        image={
+          image
+            ? image
+            : "https://th.bing.com/th/id/OIP.GnqZiwU7k5f_kRYkw8FNNwHaF3?pid=ImgDet&rs=1"
+        }
         title={name}
       />
 

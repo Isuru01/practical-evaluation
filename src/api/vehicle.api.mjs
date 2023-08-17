@@ -1,12 +1,14 @@
 import AxiosInstance from "./AxiosInstance.mjs";
 
 const fetchVehicles = async ({ queryKey }) => {
-  console.log(queryKey[1].query);
+  const { page, query, limit } = queryKey[1];
 
-  const result = await AxiosInstance().get(
-    `/vehicles?details.brand=${queryKey[1].query}`
-  );
-  console.log(result);
+  const params =
+    queryKey[1].query === "All"
+      ? `?_page=${page}&_limit=${limit}`
+      : `?details.brand=${queryKey[1].query}&_page=${page}&_limit=${limit}`;
+
+  const result = await AxiosInstance().get(`/vehicles${params}`);
   return result.data;
 };
 

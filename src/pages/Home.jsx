@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Box, Container, Divider } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import SideDrawer from "../components/Drawer/SIdeDrawer";
 import NavBar from "../components/Navigation/NavBar";
+import Loader from "../components/Loader";
 import { SearchContext } from "../context/Context.mjs";
 import SearchBar from "../components/Search/SearchBar";
 import SearchResults from "../components/Search/SearchResults";
@@ -22,11 +21,11 @@ const Home = () => {
   return (
     <Container>
       <NavBar />
-      <Box sx={{ mt: 2 }}>
-        <Divider />
 
+      <Box sx={{ mt: 2 }}>
         <SearchContext.Provider value={searchContextValue}>
           <SearchBar />
+          <Divider sx={{ mb: 2 }} />
           <SearchResults />
         </SearchContext.Provider>
       </Box>

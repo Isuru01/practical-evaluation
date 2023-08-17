@@ -1,11 +1,17 @@
 import { useState, useContext } from "react";
-import { Box, TextField, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  InputAdornment,
+  FormHelperText,
+} from "@mui/material";
 import { handleSubmit, handleBid } from "./utils/utils.mjs";
 import { BiddingContext } from "../context/Context.mjs";
 import PopUp from "./Models/PopUp";
 
 const BiddingField = ({ id, name, price, brand, image }) => {
-  const { bidding, setBidding } = useContext(BiddingContext);
+  const { setBidding } = useContext(BiddingContext);
 
   const [error, setError] = useState({
     error: true,
@@ -28,10 +34,14 @@ const BiddingField = ({ id, name, price, brand, image }) => {
         fullWidth
         label="Bid"
         size="small"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">LKR</InputAdornment>,
+        }}
         defaultValue={bid}
         onChange={(e) => handleBid(e, setBid, setError, price)}
-        helperText={error.msg}
       />
+
+      <FormHelperText style={{ color: "red" }}>{error.msg}</FormHelperText>
 
       <Button
         sx={{ mt: 1 }}

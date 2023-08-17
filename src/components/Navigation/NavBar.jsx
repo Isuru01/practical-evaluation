@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import SideDrawer from "../Drawer/SIdeDrawer";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
@@ -11,8 +11,22 @@ const NavBar = () => {
   };
 
   return (
-    <Box>
-      <AddShoppingCartIcon color="primary" onClick={handleToggle} />
+    <Box sx={{ backgroundColor: "primary.main", py: 2, px: 4 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h5" color="#FFFFFF">
+          Bidding House
+        </Typography>
+        <AddShoppingCartIcon
+          sx={{ color: "#FFFFFF", fontSize: "1.8rem" }}
+          onClick={handleToggle}
+        />
+      </Box>
 
       <SideDrawer open={open} handleToggle={handleToggle} />
     </Box>

@@ -1,3 +1,11 @@
+import { blue, red, green, yellow, orange } from "@mui/material/colors";
+
+export const randomColor = () => {
+  const colors = [green[200], orange[200], red[200], yellow[200], blue[200]];
+  const randomCol = Math.floor(Math.random() * colors.length);
+  return colors[randomCol];
+};
+
 export const handleBid = (e, setBid, setError, price) => {
   const { name, value } = e.target;
 
@@ -35,7 +43,6 @@ export const handleSubmit = (
     let exist = prev.find((prevVeh) => prevVeh.id === vehicle.id);
 
     if (exist) {
-      // console.log(exist);
       exist.bid = bid;
       setAdd(true);
       return [...prev];
